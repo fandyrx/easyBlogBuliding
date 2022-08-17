@@ -2,7 +2,7 @@
 const express = require ('express')
 const multer = require('multer')
 const app = express();
-const port = 8080
+const port = 8081
 
 //开放跨域请求
 app.use(function (req,res,next){
@@ -15,11 +15,15 @@ app.use(function (req,res,next){
 })
 //上传允许解析
 app.use(express.json())
+
 const update = multer({
   dest:"/public/upload/temp"
 })
 app.use(update.any())
 
+
+app.use("/test",require("./routers/TestRouter"))
+app.use("/admin",require("./routers/AdminRouter"))
 
 app.get('/',(req,res)=>{
   res.send('hello,world')
